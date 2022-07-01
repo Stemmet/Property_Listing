@@ -1,3 +1,7 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,7 +12,7 @@
 
 #landing {
     background-image:
-        url(https://cdn.britannica.com/42/126842-050-0803BC41/Sea-Point-Cape-Town-SAf.jpg);
+        url(https://www.capetown.travel/wp-content/uploads/2019/02/Bo-Kaap_Craig-Howes-1024x683.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
