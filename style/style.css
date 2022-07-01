@@ -36,7 +36,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
-    /* justify-content: space-between; */
 }
 
 .projects-container img {
@@ -44,6 +43,12 @@
     width: 80vh;
     flex-grow: 1;
     object-fit: cover;
+}
+
+#filter{
+    max-width: 80%;
+    transform: translate(10%, -30%)
+    
 }
 
 .content_img {

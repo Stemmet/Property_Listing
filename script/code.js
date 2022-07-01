@@ -1,69 +1,69 @@
 let property = [
     {
-        name: "property1",
+        name: document.getElementById("property1"),
         type: "Apartment",
         location: "City Centre",
         bedrooms: 1,
         price: 2250000
     },
     {
-        name: "property2",
+        name: document.getElementById("property2"),
         type: "Apartment",
         location: "Camps Bay",
         bedrooms: 2,
         price: 10500000
     },
     {
-        name: "property3",
+        name: document.getElementById("property3"),
         type: "House",
         location: "Beverly Hills",
         bedrooms: 5,
         price: 9600000
     },
     {
-        name: "property4",
+        name: document.getElementById("property4"),
         type: "House",
         location: "Sea Point",
         bedrooms: "3",
         price: 6850000
     },
     {
-        name: "property5",
+        name: document.getElementById("property5"),
         type: "House",
         location: "Clifton",
         bedrooms: "4",
         price: 52000000
     },
     {
-        name: "property6",
+        name: document.getElementById("property6"),
         type: "House",
         location: "Bishopscourt Village",
         bedrooms: "3",
         price: 8150000
     },
     {
-        name: "property7",
+        name: document.getElementById("property7"),
         type: "Apartment",
         location: "Clifton",
         bedrooms: 4,
         price: 32000000
     },
     {
-        name: "property8",
+        name: document.getElementById("property8"),
         type: "House",
-        location: "Cliton",
+        location: "Clifton",
         bedrooms: 7,
         price: 3950000
     },
     {
-        name: "property9",
+        name: document.getElementById("property9"),
         type: "Apartment",
         location: "Camps Bay",
         bedrooms: 2,
         price: 17250000
     },
     {
-        name: "property10",
+        name: document.getElementById("property10"),
         type: "Apartment",
         location: "Camps Bay",
         bedrooms: 3,
@@ -73,28 +73,34 @@ let property = [
 
 function filterPrice() {
     
+    
+    // let priceRange2 = {
+        //     lower: 0,
+        //     upper: 10000000
+        // };
+        
+        // let filteredProperty2 = property.filter(function (property) {
+            //     return property.price >= this.lower && property.price <= this.upper;
+            // }, priceRange2);
+            
+            // console.log(filteredProperty2);
+            if (condition) {
+                let priceRange1 = {
+                    lower: 0,
+                    upper: 1000000
+                };
+                
+                let filteredProperty1 = property.filter(function (property) {
+                    return property.price >= this.lower && property.price <= this.upper;
+                }, priceRange1);
+                
+                console.log(filteredProperty1);
+    } else if(condition){
+        
+    }else{
+      
     }
-let priceRange1 = {
-    lower: 0,
-    upper: 1000000
-};
-
-let filteredProperty1 = property.filter(function (property) {
-    return property.price >= this.lower && property.price <= this.upper;
-}, priceRange1);
-  
-console.log(filteredProperty1);
-
-let priceRange2 = {
-    lower: 0,
-    upper: 10000000
-};
-
-let filteredProperty2 = property.filter(function (property) {
-    return property.price >= this.lower && property.price <= this.upper;
-}, priceRange1);
-  
-console.log(filteredProperty2);
+    }
 
 // initiate(newPlots);
 
