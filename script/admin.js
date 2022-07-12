@@ -1,97 +1,82 @@
+let propertyType = document.getElementById("propertyType");
+let propertyLocation = document.getElementById("propertyLocation");
+let propertyBedrooms = document.getElementById("propertyBedrooms");
+let propertyPrice = document.getElementById("propertyPrice");
 
-let taskInput = document.getElementById("new-task");
-let addButton = document.getElementsByTagName("button")[0];
-let incompleteTasksHolder = document.getElementById("incomplete-tasks");
-let completedTasksHolder = document.getElementById("completed-tasks");
 
-let createNewTaskElement = function(taskString) {
-  let listItem = document.createElement("li");
+if(localStorage.getItem("myPoducts") == null){
+    productContainer = [];
+}
+else{
+    productContainer=JSON.parse(localStorage.getItem("myPoducts"));
+    displayProduct();
+}
 
-  let checkBox = document.createElement("input");
-  let label = document.createElement("label");
-  let editInput = document.createElement("input");
-  let editButton = document.createElement("button");
-  let deleteButton = document.createElement("button");
+
+
+
+function addProduct(){
+    console.log(propertyType);
+
+    let product = {
+        type: propertyType.value,
+        location:propertyLocation.value,
+        bedrooms:propertyBedrooms.value,
+        price:propertyPrice.value
+    }
+
+    console.log(product);
+
+    productContainer.push(product);
+
+    localStorage.setItem("myPoducts", JSON.stringify(productContainer));
+
+    displayProduct();
+
+    clearForm();
+}
+
+
+function displayProduct(){
+    let productItem="";
     
-  checkBox.type = "checkbox";
-  editInput.type = "text";
-  
-  editButton.innerText = "Edit";
-  editButton.className = "edit";
-  deleteButton.innerText = "Delete";
-  deleteButton.className = "delete";
-  
-  label.innerText = taskString;
-  
-  listItem.appendChild(checkBox);
-  listItem.appendChild(label);
-  listItem.appendChild(editInput);
-  listItem.appendChild(editButton);
-  listItem.appendChild(deleteButton);
+    for(let i=0; i<productContainer.length; i++){
+        
+        productItem+=
+        `
+        <tr>
+            <td>`+(i+1)+`</td>
+            <td>`+productContainer[i].type+`</td>
+            <td>`+productContainer[i].location+`</td>
+            <td>`+productContainer[i].bedrooms+`</td>
+            <td>`+productContainer[i].price+`</td>
+            <td> <button class="btn btn-outline-warning">Update</button> </td>
+            <td> <button class="btn btn-outline-danger" onclick="deleteProduct(`+i+`)"> Delete</button> </td>
+        </tr>
+        
+        `
+    }
 
-  return listItem;
+    document.getElementById("myBody").innerHTML=productItem;
 }
 
-let addTask = function() {
-  console.log("Add task...");
-  let listItem = createNewTaskElement(taskInput.value);
-  incompleteTasksHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);  
-  
-  taskInput.value = "";   
+
+function clearForm()
+{
+    propertyType.value ="";
+    propertyLocation.value ="";
+    propertyBedrooms.value ="";
+    propertyPrice.value ="";
 }
-let editTask = function() {
-  console.log("Edit Task...");
-  
-  let listItem = this.parentNode;
-  
-  let editInput = listItem.querySelector("input[type=text]")
-  let label = listItem.querySelector("label");
-  
-  let containsClass = listItem.classList.contains("editMode");
-  if(containsClass) {
-    label.innerText = editInput.value;
-  } else {
-    editInput.value = label.innerText;
-  }
-  listItem.classList.toggle("editMode");
+
+
+function deleteProduct(index)
+{
+    productContainer.splice(index,1);
+    console.log(localStorage.getItem("myProducts"));
+    localStorage.setItem("myProducts", JSON.stringify(productContainer));
+    displayProduct();
 }
-let deleteTask = function() {
-  console.log("Delete task...");
-  let listItem = this.parentNode;
-  let ul = listItem.parentNode;
-  ul.removeChild(listItem);
-}
-let taskCompleted = function() {
-  console.log("Task complete...");
-  let listItem = this.parentNode;
-  completedTasksHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskIncomplete);
-}
-let taskIncomplete = function() {
-  console.log("Task Incomplete...");
-  let listItem = this.parentNode;
-  incompleteTasksHolder.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);
-}
-let bindTaskEvents = function(taskListItem, checkBoxEventHandler) {
-  console.log("Bind list item events");
-  let checkBox = taskListItem.querySelector("input[type=checkbox]");
-  let editButton = taskListItem.querySelector("button.edit");
-  let deleteButton = taskListItem.querySelector("button.delete");
-  editButton.onclick = editTask;
-  deleteButton.onclick = deleteTask;
-  checkBox.onchange = checkBoxEventHandler;
-}
-let ajaxRequest = function() {
-  console.log("AJAX Request");
-}
-addButton.addEventListener("click", addTask);
-addButton.addEventListener("click", ajaxRequest);
-for(let i = 0; i <  incompleteTasksHolder.children.length; i++) {
-  bindTaskEvents(incompleteTasksHolder.children[i], taskCompleted);
-}
-for(let i = 0; i <  completedTasksHolder.children.length; i++) {
-  bindTaskEvents(completedTasksHolder.children[i], taskIncomplete); 
-}
+
+
 
